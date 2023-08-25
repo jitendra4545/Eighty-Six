@@ -1,6 +1,6 @@
 
 
-
+const jwt=require('jsonwebtoken')
 const express = require(`express`)
 const { UserModel } = require("../model/UserModel")
 
@@ -13,7 +13,7 @@ UserRouter.post("/", async (req, res) => {
     console.log(data)
     try {
         let newUser = new UserModel(data)
-        await newUser.save()
+       
         res.send({"msg":"User have been added successfully"})
     } catch (err) {
         res.send({"msg":"somthing went wrong! cannot post userData","error":err.message})
@@ -60,6 +60,11 @@ UserRouter.get("/:id", async (req, res) => {
         res.send({"msg":"somthing went wrong! cannot post userData","error":err.message})
     }
 })
+
+
+
+
+
 
 
 module.exports = {
