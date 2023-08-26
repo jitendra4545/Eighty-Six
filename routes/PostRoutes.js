@@ -6,7 +6,7 @@ const PostRouter=express.Router()
 
 
 
-PostRouter.post("/",async(req,res)=>{
+PostRouter.post("/",auth,async(req,res)=>{
     let data=req.body
     // console.log(req.body)
  console.log(data)

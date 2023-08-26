@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 // app.use("/users",auth())
 app.use("/users",UserRouter)
-app.use("/posts",auth)
+// app.use("/posts",auth)
 app.use("/posts",PostRouter)
 app.get("/", async (req, res) => {
     res.send('hi welcome to 86 agency')
