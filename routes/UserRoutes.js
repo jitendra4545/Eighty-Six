@@ -7,13 +7,30 @@ const { UserModel } = require("../model/UserModel")
 const UserRouter = express.Router()
 
 
+// UserRouter.post("/login",async(req,res)=>{
+//     let data=req.body
+//     console.log(data)
+//     try{
+//          let userData=await UserModel.find({email:data.email})
+//          console.log("dssssssssss",userData)
+//      }catch(err){
+//         res.send({"msg":"somthing went wrong! ","error":err.message}) 
+//     }
+    
+    
+//     })    if(userData.length>0){
+            
+//             var token = jwt.sign({ user_id:userData[0]._id }, 'jitendra');
+//             res.send({"msg":"Login Successfull","token":token})
+//          } 
+    
 
 UserRouter.post("/", async (req, res) => {
     let data = req.body
     console.log(data)
     try {
         let newUser = new UserModel(data)
-       
+       await newUser.save()
         res.send({"msg":"User have been added successfully"})
     } catch (err) {
         res.send({"msg":"somthing went wrong! cannot post userData","error":err.message})
