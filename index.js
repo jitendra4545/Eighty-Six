@@ -8,6 +8,7 @@ const { UserModel } = require('./model/UserModel')
 const { UserRouter } = require('./routes/UserRoutes')
 const { auth } = require('./middleware/Authentication')
 const { PostRouter } = require('./routes/PostRoutes')
+const { PostModel } = require('./model/PostModel')
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -36,7 +37,7 @@ app.get("/analytics/users",async(req,res)=>{
             let allData=await PostModel.find()
             res.send(allData)
         }catch(err){
-    
+            res.send({"msg":"somthing went wrong! cannot Get PostData","error":err.message}) 
         }
     })
 
