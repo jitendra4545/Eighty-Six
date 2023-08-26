@@ -43,27 +43,27 @@ app.get("/analytics/posts", async (req, res) => {
 
 
 app.get("/analytics/posts/top-liked", async (req, res) => {
-    try{
-        let allData = await PostModel.find()
+    try {
+        let allData = await PostModel.find().sort({ likes: -1 }).limit(5)
 
-        const sorting = allData.sort((a, b) => b.likes - a.likes).slice(0, 5)
-        res.send(sorting)
-    }catch(err){
+        // const sorting = allData.sort((a, b) => b.likes - a.likes).slice(0, 5)
+        res.send(allData)
+    } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot Get PostData", "error": err.message })
     }
-  
+
 })
 
 
 
-app.get("/analytics/users/top-active",async(req,res)=>{
-   let obj={}
-    try{
-        let allData = await PostModel.find()
-        // const filt=allData.sort((a,b)=>b.)
+app.get("/analytics/users/top-active", async (req, res) => {
+
+    try {
+        let allData = await PostModel.find().sort('-likes').limit(5)
+
         res.send(allData)
-    
-    }catch(err){
+
+    } catch (err) {
 
     }
 })
