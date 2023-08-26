@@ -1,6 +1,7 @@
 
 require('dotenv').config()
 const jwt=require('jsonwebtoken')
+const cors=require('cors')
 const express = require('express')
 const { connection } = require('./config/db')
 const { UserModel } = require('./model/UserModel')
