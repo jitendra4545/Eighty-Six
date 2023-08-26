@@ -1,12 +1,12 @@
 const express=require('express')
- const { auth } = require('../middleware/Authentication')
+//  const { auth } = require('../middleware/Authentication')
 const { PostModel } = require('../model/PostModel')
 
 const PostRouter=express.Router()
 
 
 
-PostRouter.post("/",auth,async(req,res)=>{
+PostRouter.post("/",async(req,res)=>{
     let data=req.body
     // console.log(req.body)
  console.log(data)
@@ -16,7 +16,7 @@ try{
     await newData.save()
     res.send({"msg":"Post have been added successfully"})
 }catch(err){
-console.log(err)
+    res.send({"msg":"somthing went wrong! cannot post postData","error":err.message})
 }
 
 
@@ -31,7 +31,7 @@ PostRouter.get("/:id", async (req, res) => {
         let SingleData = await PostModel.find({ _id: id })
         res.send(SingleData)
     } catch (err) {
-        res.send({"msg":"somthing went wrong! cannot post userData","error":err.message})
+        res.send({"msg":"somthing went wrong! cannot get postData","error":err.message})
     }
 })
 
@@ -43,7 +43,7 @@ PostRouter.put("/:id", async (req, res) => {
         let updateData = await PostModel.updateOne({ _id: id }, data)
         res.send({"msg":"Post data have been updated successfully"})
     } catch (err) {
-        res.send({"msg":"somthing went wrong! cannot post userData","error":err.message})
+        res.send({"msg":"somthing went wrong! cannot update postData","error":err.message})
     }
 })
 
@@ -55,7 +55,7 @@ PostRouter.delete("/:id", async (req, res) => {
         let deleteData = await PostModel.deleteOne({ _id: id })
         res.send({"msg":"Post have been deleted successfully"})
     } catch (err) {
-        res.send({"msg":"somthing went wrong! cannot post userData","error":err.message})
+        res.send({"msg":"somthing went wrong! cannot delete postData","error":err.message})
     }
 })
 

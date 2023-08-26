@@ -6,7 +6,7 @@ const express = require('express')
 const { connection } = require('./config/db')
 const { UserModel } = require('./model/UserModel')
 const { UserRouter } = require('./routes/UserRoutes')
-const { auth } = require('./middleware/Authentication')
+// const { auth } = require('./middleware/Authentication')
 const { PostRouter } = require('./routes/PostRoutes')
 const { PostModel } = require('./model/PostModel')
 const app = express()
@@ -42,31 +42,7 @@ app.get("/analytics/users",async(req,res)=>{
     })
 
 
-app.post("/login",async(req,res)=>{
-let data=req.body
 
-try{
-     let userData=await UserModel.find({email:data.email})
-     console.log(userData)
-     if(userData.length>0){
-        
-        var token = jwt.sign({ user_id:userData[0]._id }, 'jitendra');
-        res.send({"msg":"Login Successfull","token":token})
-     } 
-}catch(err){
-    res.send({"msg":"somthing went wrong! ","error":err.message}) 
-}
-
-
-})
-
-// app.post("/users",async(req,res)=>{
-//     try{
-
-//     }catch(err){
-        
-//     }
-// })
 
 app.listen(process.env.port, async () => {
     try {
