@@ -69,14 +69,21 @@ PostRouter.post("/:id/like",async(req,res)=>{
       await newData.save()
       res.send({"msg":"Post have been liked successfully"})
     }catch(err){
-
+        res.send({"msg":"somthing went wrong! cannot like","error":err.message})
     }
 })
 
 
 PostRouter.post("/:id/unlike",async(req,res)=>{
-    try{}catch(err){
-        
+    let id=req.params.id
+    console.log(id)
+    try{
+        let newData=await PostModel.findById({_id:id})
+        newData.likes=Math.max(newData.likes - 1, 0);
+        await newData.save()
+        res.send({"msg":"Post have been unliked successfully"})
+    }catch(err){
+        res.send({"msg":"somthing went wrong! cannot unlike","error":err.message})  
     }
 })
 
